@@ -24,6 +24,8 @@ def main():
 
         # Fill screen with black
         screen.fill((0, 0, 0, 255))
+        # Update player rotation
+        player.update(dt)
         # Draw player sprite
         player.draw(screen)
         # Refresh screen
