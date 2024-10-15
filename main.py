@@ -13,6 +13,11 @@ def main():
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
 
+    # Groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
+
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
     # GAME LOOP
@@ -22,18 +27,19 @@ def main():
             if event.type == pygame.QUIT:
                 return
 
+        # Update updatable group
+        for obj in updatable:
+            obj.update(dt)
         # Fill screen with black
         screen.fill((0, 0, 0, 255))
-        # Update player rotation
-        player.update(dt)
-        # Draw player sprite
-        player.draw(screen)
+        # Update drawables group
+        for obj in drawable:
+            obj.draw(screen)        
         # Refresh screen
-        pygame.display.flip()
-
-        
+        pygame.display.flip()        
 
         # Advance the game clock.  This should happen last.
+        # 60 FPS cap
         dt = game_clock.tick(60) / 1000
 
 if __name__ == "__main__":
