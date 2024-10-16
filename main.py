@@ -45,6 +45,11 @@ def main():
             if asteroid.check_collisions(player):
                 print("Game over!")
                 sys.exit()
+            # Update shot collisions
+            for shot in shots:
+                if asteroid.check_collisions(shot):
+                    shot.kill()
+                    asteroid.split()
         # Fill screen with black
         screen.fill((0, 0, 0, 255))
         # Update drawables group
